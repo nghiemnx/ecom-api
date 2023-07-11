@@ -15,12 +15,6 @@ export class ProductsService {
   findAll(query) {
     const { size, word } = query;
     let results = [];
-    if (!isNaN(size)) {
-      results = shuffle(PRODUCT_TABLE).slice(
-        0,
-        +size > this._limit ? this._limit : +size,
-      );
-    }
     if (word) {
       results = filter(PRODUCT_TABLE, (item) => {
         const nameCompare = item.name?.toLowerCase();
@@ -28,6 +22,10 @@ export class ProductsService {
         return nameCompare.includes(wordCompare);
       });
     }
+    if (!isNaN(size)) {
+      results = results.slice(0, +size > this._limit ? this._limit : +size);
+    }
+
     return results;
   }
 
