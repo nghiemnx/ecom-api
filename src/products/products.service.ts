@@ -14,7 +14,7 @@ export class ProductsService {
 
   findAll(query) {
     const { size, word } = query;
-    let results = [];
+    let results = PRODUCT_TABLE;
     if (word) {
       results = filter(PRODUCT_TABLE, (item) => {
         const nameCompare = item.name?.toLowerCase();
